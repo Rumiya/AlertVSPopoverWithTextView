@@ -25,12 +25,12 @@ class PopoverViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onCancelButtonPressed(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onCancelButtonPressed(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func onOKButtonPressed(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onOKButtonPressed(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     /*

@@ -22,26 +22,26 @@ class ViewController: UIViewController, UITextViewDelegate, UIPopoverPresentatio
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func showAlert(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Hello, I'm alert! \n\n\n\n\n\n\n", message: "", preferredStyle: .Alert)
+    @IBAction func showAlert(_ sender: AnyObject) {
+        let alertController = UIAlertController(title: "Hello, I'm alert! \n\n\n\n\n\n\n", message: "", preferredStyle: .alert)
 
-        let rect        = CGRectMake(15, 50, 240, 150.0)
+        let rect        = CGRect(x: 15, y: 50, width: 240, height: 150.0)
         let textView    = UITextView(frame: rect)
 
         textView.font               = UIFont(name: "Helvetica", size: 15)
-        textView.textColor          = UIColor.lightGrayColor()
-        textView.backgroundColor    = UIColor.whiteColor()
-        textView.layer.borderColor  = UIColor.lightGrayColor().CGColor
+        textView.textColor          = UIColor.lightGray
+        textView.backgroundColor    = UIColor.white
+        textView.layer.borderColor  = UIColor.lightGray.cgColor
         textView.layer.borderWidth  = 1.0
         textView.text               = "Enter message here"
         textView.delegate           = self
 
         alertController.view.addSubview(textView)
 
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let action = UIAlertAction(title: "Ok", style: .Default, handler: { action in
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: { action in
 
-            let msg = (textView.textColor == UIColor.lightGrayColor()) ? "" : textView.text
+            let msg = (textView.textColor == UIColor.lightGray) ? "" : textView.text
 
             print(msg)
 
@@ -49,30 +49,30 @@ class ViewController: UIViewController, UITextViewDelegate, UIPopoverPresentatio
         alertController.addAction(cancel)
         alertController.addAction(action)
 
-        self.presentViewController(alertController, animated: true, completion: {})
+        self.present(alertController, animated: true, completion: {})
 
     }
 
-    func textViewDidBeginEditing(textView: UITextView) {
-        if textView.textColor == UIColor.lightGrayColor(){
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray{
             textView.text = ""
-            textView.textColor = UIColor.darkGrayColor()
+            textView.textColor = UIColor.darkGray
         }
     }
 
-    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         textView.resignFirstResponder()
         return true
     }
 
-    @IBAction func showPopover(sender: AnyObject) {
+    @IBAction func showPopover(_ sender: AnyObject) {
         
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let pc = storyboard.instantiateViewControllerWithIdentifier("Popover") as? PopoverViewController
-        pc?.modalPresentationStyle = .Popover
+        let pc = storyboard.instantiateViewController(withIdentifier: "Popover") as? PopoverViewController
+        pc?.modalPresentationStyle = .popover
 
         let popoverViewController = pc!.popoverPresentationController
-        popoverViewController?.permittedArrowDirections = .Any
+        popoverViewController?.permittedArrowDirections = .any
         popoverViewController?.delegate = self
         popoverViewController?.sourceView = self.showPopoverButton
         popoverViewController?.sourceRect = CGRect(
@@ -81,12 +81,12 @@ class ViewController: UIViewController, UITextViewDelegate, UIPopoverPresentatio
             width: 1,
             height: 1)
 
-        presentViewController(pc!, animated: true, completion: nil)
+        present(pc!, animated: true, completion: nil)
 
     }
 
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 
 
